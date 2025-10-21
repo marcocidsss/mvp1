@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: venue
+      MYSQL_USER: venue_user
+      MYSQL_PASSWORD: venue_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  web:
+    build: .
+    container_name: ecoriego_web
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql+pymysql://venue_user:venue_pass@db:3306/venue
+      SECRET_KEY: change-this-secret
+      JWT_SECRET_KEY: change-this-jwt
+    ports:
+      - "8000:8000"
+volumes:
+  dbdata:

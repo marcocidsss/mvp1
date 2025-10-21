@@ -9,11 +9,10 @@ jwt = JWTManager()
 def create_app():
     app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
 
-    # Configuración de base de datos y JWT
-    DB_USER = os.environ.get("DB_USER", "root")
-    DB_PASS = os.environ.get("DB_PASS", "")
-    DB_HOST = os.environ.get("DB_HOST", "localhost")
-    DB_NAME = os.environ.get("DB_NAME", "venue")
+    DB_USER = os.environ.get("DB_USER", "root")        # Usuario MySQL
+    DB_PASS = os.environ.get("DB_PASS", "12345")            # Contraseña MySQL
+    DB_HOST = os.environ.get("DB_HOST", "localhost")   # Host MySQL
+    DB_NAME = os.environ.get("DB_NAME", "venue")       # Base de datos
 
     app.config.from_mapping(
         SECRET_KEY=os.environ.get('SECRET_KEY', 'change-me'),
